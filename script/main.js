@@ -1,4 +1,4 @@
-    var url = 'https://openexchangerates.org/api/currencies.json';
+    const url = 'https://openexchangerates.org/api/currencies.json';
     fetch(url).then(function(response) {
         response.text().then(function(text) {
 
@@ -18,6 +18,7 @@
 
     function addOption(parent, index, item) {
         let element = document.createElement('option');
+
         element.value = index;
         element.innerHTML = index +' - '+ item;
         parent.appendChild(element);

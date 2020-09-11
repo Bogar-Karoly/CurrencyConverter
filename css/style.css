@@ -1,21 +1,65 @@
 body, html {
-    background-color: rgb(39, 180, 39);
+  background-color: rgb(39, 180, 39);
+  
 }
 .container {
-    position: absolute;
+  position: absolute;
 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-    max-width: 400px;
-    width: 100%;
+  max-width: 320px;
+  width: 100%;
 
-    background: rgb(236, 234, 234);
+  background: rgb(236, 234, 234);
 
-    border-width: 2px;
-    border-style: solid;
+  border-radius: 1em;
+  border: none;
 
+  padding: 10px;
+}
+.con, .title, .formGroup,.form-container,.formSubmit,.result {
+  
+}
+.con {
+  
+}
+
+.title {
+  text-align: center;
+}
+.form-container {
+  text-align: center;
+}
+select {
+  height: 2.5em;
+  width: 90% ;
+}
+input {
+  height: 2.5em;
+  width: 90% ;
+}
+
+input:focus, select:focus {
+  outline-width: 0;
+}
+.formGroup {
+  margin: 10px;
+}
+.result {
+  display: inline-flex;
+}
+#madar {
+  border: 1px solid rgb(129, 129, 129);
+  height: 1.2em;
+  width: 100%;
+}
+input, select {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
   /*sdasd*/
 /*
   body {
