@@ -13,8 +13,7 @@
         <script src="script/main.js"></script>
         <!-- JQUERY -->
         <script>
-            $(function() {
-                //$('.selectpicker').selectpicker();
+            $(document).ready(function() {
                 $('form').on('submit', function (e) {
                     e.preventDefault();
 
@@ -22,8 +21,8 @@
                         type: 'post',
                         url: 'script/action.php',
                         data:  $('form').serialize(),
-                        success: function (post) {  
-                            Result(post);
+                        success: function (data) {  
+                            Result(data);
                         }
                     });
                 });
@@ -32,11 +31,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="con"><!--
-            <div class="title">
-                <h1>Currency Converter</h1>
-            </div>
-            -->
+            <div class="con">
             <form class="form-container">
                 <div class="formGroup">
                     <input type="text" name="Value" placeholder="Value...">
@@ -58,22 +53,5 @@
             </div>
             <div id="resultBox" class="resultBox"></div>
         </div>
-        
-
-        <!--
-        <div class="button"></div>
-        <button class="circle button2"></button>
-        <div class="header">
-
-        </div>
-        <div id="container">
-            <div id="halfclip">
-                <div class="halfcircle" id="clipped">
-                </div>
-            </div>
-            <div class="halfcircle" id="fixed">
-            </div>
-        </div>
-        -->
     </body>
 </html>
