@@ -46,6 +46,6 @@ function Swapping () {
 function Result (post) {
     let result = String(JSON.parse(post));
     let resultBox = document.getElementById('resultBox');
-    resultBox.innerHTML = 'Result: ' + result + ' ' + document.getElementById('inputTo').value;
+    resultBox.innerHTML = `Result: ${result} ${document.getElementById('inputTo').value}`;
     Dropbar();
 }

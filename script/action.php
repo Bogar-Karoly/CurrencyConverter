@@ -10,7 +10,7 @@ $toEuro = $value / floatval($data["{$from}"]);
 $newCurrency = $toEuro * floatval($data["{$to}"]);
 
 echo json_encode(number_format($newCurrency, 6, '.', ''));
-
+exit();
 function Callapi() {
     require_once('Url.php');
 
@@ -25,4 +25,5 @@ function Callapi() {
 
     return $data;
 }
+
 ?>
