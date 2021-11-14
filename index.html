@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>CurrencyConverter</title>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CurrencyConverter</title>
 
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -10,7 +11,7 @@
         <script src="https://kit.fontawesome.com/44af24657a.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        <script src="script/main.js"></script>
+        <script src="js/main.js"></script>
         <!-- JQUERY -->
         <script>
             $(document).ready(function() {
@@ -19,7 +20,7 @@
 
                     $.ajax({
                         type: 'post',
-                        url: 'script/action.php',
+                        url: 'php/action.php',
                         data:  $('form').serialize(),
                         success: function (data) {
                             console.log(data);
@@ -33,7 +34,7 @@
     <body>
         <div class="container">
             <div class="con">
-            <form class="form-container" onsubmit="">
+            <div class="form-container">
                 <div class="formGroup">
                     <input type="text" name="Value" placeholder="Value...">
                 </div>
@@ -49,7 +50,7 @@
                 <div class="formGroup">
                     <input type="submit" class="submit" name="submit" value="Convert">
                 </div>
-            </form>
+            </div>
             
             </div>
             <div id="resultBox" class="resultBox"></div>
