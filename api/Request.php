@@ -8,6 +8,8 @@ class Request {
         }
         $controller = new Controller;
         $param = $this->getBody();
+        if(!method_exists($controller, $param['api']))
+            return new Response(false,Application::$app->error->getErrorByCode(101));
         return json_encode($controller->{$param['api']}($param));
     }
     public function getMethod() {

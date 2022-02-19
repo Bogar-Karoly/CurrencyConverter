@@ -4,11 +4,15 @@ class Application {
     public static Application $app;
     public static Database $db;
     public Request $request;
+    public ApiError $error;
+    //public Response $response;
 
     function __construct() {
-        self::$app = $this;
-        self::$db = new Database;
+        //$this->response = new Response;
+        $this->error = new ApiError;
         $this->request = new Request;
+        self::$db = new Database;
+        self::$app = $this;
     }
 
     public function run() {

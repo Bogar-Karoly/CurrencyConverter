@@ -1,8 +1,3 @@
-/*
-* Note: "I could use javascript for the exchange too, so everything could be on the client side. But there are security reasons, so I choose to not to do.
-* Or it could have been done by the server."
-*/
-
 // api request for currency types
 const url = 'https://openexchangerates.org/api/currencies.json';
 fetch(url).then(function(response) {

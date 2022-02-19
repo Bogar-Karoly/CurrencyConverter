@@ -32,9 +32,12 @@ abstract class DbModel {
         $stmt = self::prepare("SELECT * FROM $tablename");
         return $stmt->execute() && $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_CLASS) : false;
     }
-    public static function save(Array $values) {
+    public static function save(Array $values = []) {
         $tablename = static::tableName();
-        $attributes = static::attributes();
+        $attributes = array_map(function($e) { 
+            if(isset($values[$e]))
+                return $e;
+        },static::attributes());
         $params = array_map(function($e){ return ":$e"; },$values);
         $stmt = self::prepare("INSERT INTO $tablename (".implode(',', $attributes).") VALUES (".implode(',',$params).")");
         foreach($attributes as $attr) {
@@ -45,20 +48,18 @@ abstract class DbModel {
     }
     
     public static function update($condition, $values) {
-        $tablename = self::tableName();
-        $attributes = array_filter(self::attributes(),function($e) use ($values) { 
+        $tablename = static::tableName();
+        $attributes = array_filter(static::attributes(),function($e) use ($values) { 
             return isset($values[$e]) && !empty($values[$e]) && $values[$e] || isset($values[$e]) && empty($values[$e]) && $values[$e] === null; 
         }); // ignores properties with null or no value
-
         $where = array_map(function($k) { return "$k = :$k"; }, array_keys($condition));
         $attributes = array_map(function($e){ return "$e = :$e"; },$attributes);
         $stmt = self::prepare("UPDATE $tablename SET ".implode(',',$attributes)." WHERE ".implode(' AND ',$where)."");
         foreach($condition as $key => $value) {
             $stmt->bindValue(":$key", $value);
         }
-        foreach($attributes as $attr) {
-            if(isset($values[$attr]))
-                $stmt->bindValue(":$attr", $values[$attr]);
+        foreach($values as $key => $value) {
+                $stmt->bindValue(":$key", $value);
         }
         return $stmt->execute() && $stmt->rowCount() !== 0 ? true : false;
     }
