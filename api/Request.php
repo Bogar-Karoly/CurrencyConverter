@@ -2,12 +2,13 @@
 
 class Request {
     public function resolve() {
-        if(!isset($_GET['api']) || empty($_GET['api'])) {
+        $param = $this->getBody();
+        //print_r($param);
+        if(!isset($param['api']) || empty($param['api'])) {
             http_response_code(404);
             return "Missing param!";
         }
         $controller = new Controller;
-        $param = $this->getBody();
         if(!method_exists($controller, $param['api']))
             return new Response(false,Application::$app->error->getErrorByCode(101));
         return json_encode($controller->{$param['api']}($param));

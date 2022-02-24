@@ -1,11 +1,11 @@
 <?php
 
 class Application {
-    public static Application $app;
-    public static Database $db;
     public Request $request;
     public ApiError $error;
     //public Response $response;
+    public static Application $app;
+    public static Database $db;
 
     function __construct() {
         //$this->response = new Response;

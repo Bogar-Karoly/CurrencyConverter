@@ -26,8 +26,8 @@ class Controller {
         if(!isset($param['value']) || empty($param['value']))
             return new Response(false,Application::$app->error->getErrorByCode(112));
         
-        $from = CurrencyModel::first(['name' => strtoupper($param['from'])]);
-        $to = CurrencyModel::first(['name' => strtoupper($param['to'])]);
+        $from = CurrencyModel::first(['short_name' => strtoupper($param['from'])]);
+        $to = CurrencyModel::first(['short_name' => strtoupper($param['to'])]);
 
         if(!$from)
             return new Response(false,Application::$app->error->getErrorByCode(110));
@@ -35,7 +35,7 @@ class Controller {
             return new Response(false,Application::$app->error->getErrorByCode(111));
 
         $value = doubleval($param['value']);
-        $converted = round($value * doubleval($from->value) * doubleval($to->value),$this->decimal_precision,PHP_ROUND_HALF_UP);
+        $converted = round($value / doubleval($from->value) * doubleval($to->value),$this->decimal_precision,PHP_ROUND_HALF_UP);
 
         return new Response(true,['converted' => $converted]);
     }
@@ -56,28 +56,13 @@ class Controller {
         if(!$result['success'])
             return false;
 
-        $date = date(strval($result['timestamp']));
+        //$date = date(strval($result['timestamp']));
         UpdatesModel::save();
         foreach($result['rates'] as $key => $value) {
             CurrencyModel::update(['name' => $key],['value' => $value]);
         }
         return true;
     }
-    /*
-    protected function init_records() {
-        return "no more";
-        $curl = curl_init(API_KEY);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        $result = curl_exec($curl);
-        curl_close($curl);
-        $result = json_decode($result,true);
-        foreach($result['rates'] as $key => $value) {
-            CurrencyModel::save(['name' => $key, 'value' => $value]);
-        }
-    }
-    */
-
 }
 
 ?>

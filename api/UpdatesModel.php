@@ -2,9 +2,6 @@
 
 class UpdatesModel extends DbModel {
 
-    public Int $id;
-    public DateTime $date;
-
     public static function tableName() {
         return "updates";
     }

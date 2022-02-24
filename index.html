@@ -5,64 +5,67 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>CurrencyConverter</title>
 
-        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css">
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/44af24657a.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-        <!-- JQUERY -->
-        <script>
-            $(document).ready(function() {
-                $('form').on('submit', function (e) {
-                    e.preventDefault();
-
-                    $.ajax({
-                        type: 'post',
-                        url: 'php/action.php',
-                        data:  $('form').serialize(),
-                        success: function (data) {
-                            console.log(data);
-                            Result(data);
-                        }
-                    });
-                });
-            });
-        </script>
     </head>
     <body>
         <div class="container">
-            <div class="con">
-                <form id="exchange-form" class="form-container" action="" method="GET">
-                    <div class="form-group">
+            <div id="converter-con" class="part">
+                <form id="exchange-form" class="form-con" action="api/?api=calculate" method="get">
+                    <div id="input-fields">
                         <label>Value:</label>
-                        <input class="form-control" type="number" name="Value" placeholder="Value...">
-                    </div>
-                    <div type="text" class="form-group">
+                        <div>
+                            <input class="form-control" type="number" name="value">
+                            <div class="field-error"></div>
+                        </div>
                         <label>From:</label>
-                        <input id="inputFrom" class="form-control" type="text" name="From" list="selectFrom" placeholder="From...">
-                        <datalist class="selection" id="selectFrom"></datalist>
-                    </div>
-                    <button type="button" id="swapButton" onclick="Swapping()"><i  class="fas fa-exchange-alt"></i></button>
-                    <div class="formGroup">
+                        <div>
+                            <input id="inputFrom" class="form-control" type="text" name="from" list="selectFrom">
+                            <datalist class="selection" id="selectFrom"></datalist>
+                            <div class="field-error"></div>
+                        </div>
+                        <div></div>
+                        <div>
+                            <button class="btn btn-primary" id="swapButton" onclick="Swapping()"><i  class="fas fa-exchange-alt"></i></button>
+                        </div>
                         <label>To:</label>
-                        <input id="inputTo" class="form-control" type="text" name="To" list="selectTo" placeholder="To...">
-                        <datalist class="selection" id="selectTo"></datalist>
+                        <div>
+                            <input id="inputTo" class="form-control" type="text" name="to" list="selectTo">
+                            <datalist class="selection" id="selectTo"></datalist>
+                            <div class="field-error"></div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="submit" name="submit" value="Convert"></button>
+                    <div class="row">
+                        <div class="form-group col-sm">
+                            <div id="resultBox"></div>
+                        </div>
+                        <div class="form-group col-auto">
+                            <button id="convert-btn" class="btn btn-primary" type="submit">Convert</button>
+                        </div>
                     </div>
                 </form>
             </div>
-            <div id="resultBox" class="resultBox"></div>
-        </div>
-        <div id="currency-list">
-            <table>
-                <tbody id="currencies"></tbody>
-            </table>
-        </div>
-        <template>
+            <div id="currency-con" class="part">
+                <h4 class="text-center">Currencies</h4>
+                <div id="currencies"></div>
+            </div>
+            <div id="graph-con" class="part" style="display: none;">
 
+            </div>
+        </div>
+        <template id="currency-template">
+            <div class="currency">
+                <div>
+                    <div class="short_name"></div>
+                    <div class="name"></div>
+                </div>
+                <div class="value"></div>
+            </div>
         </template>
         <script src="js/main.js"></script>
     </body>
